@@ -1,0 +1,8 @@
+    .addPostBtn {
+        margin: 0;
+        margin-top: -6px;
+    }
+    
+    .text-cap {
+        text-transform: capitalize;
+    }

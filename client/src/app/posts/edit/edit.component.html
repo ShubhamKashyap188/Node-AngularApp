@@ -1,0 +1,49 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="green">
+                        <h4 class="title">Edit Post<span class="pull-right btn btn-primary addPostBtn"><a [routerLink]="['/posts']">All Posts</a></span></h4>
+                    </div>
+                    <div class="card-content">
+                        <form [formGroup]="editForm" (ngSubmit)="edit()">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">Title</label>
+                                        <input type="text" formControlName="title" class="form-control">
+                                    </div>
+                                    <div *ngIf="editFormErrors.title" class="alert alert-danger">
+                                        {{ editFormErrors.title }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!--  <label>Detail</label> -->
+                                        <div class="form-group form-black label-floating is-empty">
+                                            <label class="control-label"> Detail</label>
+                                            <textarea class="form-control" formControlName="body" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="editFormErrors.body" class="alert alert-danger">
+                                        {{ editFormErrors.body }}
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="control-label"> Status</label>
+                            <ui-switch formControlName="status" size="small"></ui-switch>
+
+                            <button type="submit" class="btn btn-success pull-right">Update</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

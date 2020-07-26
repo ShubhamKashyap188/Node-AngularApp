@@ -1,0 +1,40 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="green">
+                        <h4 class="title">Posts<span class="pull-right btn btn-primary addPostBtn"><a [routerLink]="['/posts/add']">Add Post</a></span></h4>
+
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-success">
+                                <tr>
+                                    <th><b>Title</b></th>
+                                    <th><b>Date</b></th>
+                                    <th><b>Status</b></th>
+                                    <th><b>Action</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: p }">
+                                    <td *ngIf="post.title" class="text-cap">{{post.title}}</td>
+                                    <td *ngIf="post.created_at">{{post.created_at | date:'fullDate'}}</td>
+                                    <td>
+                                        <ui-switch (change)="onChange($event,post._id)" [checked]="post.status" size="small"></ui-switch>
+                                    </td>
+                                    <td><a [routerLink]="['/posts/edit',post._id]" style="cursor: pointer"><i class="fa fa-pencil text-primary"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="delete(post._id)" style="cursor: pointer"><i class="fa fa-trash-o text-danger"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <pagination-controls class="text-center my-pagination" (pageChange)="p = $event"></pagination-controls>
+            </div>
+
+
+        </div>
+    </div>
+</div>

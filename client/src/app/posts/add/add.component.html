@@ -1,0 +1,47 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="green">
+                        <h4 class="title">Add Post <span class="pull-right btn btn-primary addPostBtn"><a [routerLink]="['/posts']">All Posts</a></span></h4>
+                    </div>
+                    <div class="card-content">
+                        <form [formGroup]="addForm" (ngSubmit)="add()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">Title</label>
+                                        <input type="text" autocomplete="off" formControlName="title" class="form-control">
+                                    </div>
+                                    <div *ngIf="addFormErrors.title" class="alert alert-danger">
+                                        {{ addFormErrors.title }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!--  <label>Detail</label> -->
+                                        <div class="form-group form-black label-floating is-empty">
+                                            <label class="control-label"> Detail</label>
+                                            <textarea class="form-control" formControlName="body" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <label class="control-label"> Status</label>
+                                    <div *ngIf="addFormErrors.body" class="alert alert-danger">
+                                        {{ addFormErrors.body }}
+                                    </div>
+                                </div>
+                            </div>
+                            <ui-switch formControlName="status" checked size="small"></ui-switch>
+                            <button type="submit" class="btn btn-success pull-right" [disabled]="!addForm.valid">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

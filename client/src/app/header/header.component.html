@@ -1,0 +1,145 @@
+<div id="navbar-success">
+    <nav class="navbar navbar-success" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" [routerLink]="['']">Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav pull-right">
+                    <li *ngIf="!userService.loggedIn()"><a data-toggle="modal" data-target="#signupModal">Signup</a></li>
+                    <li *ngIf="!userService.loggedIn()"><a data-toggle="modal" data-target="#loginModal">Login</a></li>
+                    <li *ngIf="userService.loggedIn()"><a style="cursor:pointer" [routerLink]="['/posts']">Dashboard</a></li>
+                    <li *ngIf="userService.loggedIn()"><a style="cursor:pointer">username</a></li>
+                    <li *ngIf="userService.loggedIn()"><a (click)="logout()" style="cursor:pointer">Logout</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+</div>
+<!-- Login Modal -->
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" autocomplete="off" id="email" formControlName="email" placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div *ngIf="loginformErrors.email" class="alert alert-danger">
+                        {{ loginformErrors.email }}
+                    </div>
+                    <div *ngIf="loginerr != ''" class="alert alert-danger">
+                        {{ loginerr }}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="pwd" formControlName="password" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div *ngIf="loginformErrors.password" class="alert alert-danger">
+                        {{ loginformErrors.password }}
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-5">
+                            <div class="checkbox">
+                                <label><input type="checkbox"> Remember me</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="checkbox">
+                                <a href=""> Forgot Password ?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--  <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+        </div>
+
+    </div>
+</div>
+<!-- Signup Modal -->
+<div id="signupModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" [formGroup]="signupForm" (ngSubmit)="signup()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" autocomplete="off" id="email" formControlName="email" placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div *ngIf="signupformErrors.email" class="alert alert-danger">
+                        {{ signupformErrors.email }}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" formControlName="password">
+                        </div>
+                    </div>
+                    <div *ngIf="signupformErrors.password" class="alert alert-danger">
+                        {{ signupformErrors.password }}
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-3">
+                            <div class="checkbox">
+                                <button class="btn btn-info"><i class="fa fa-facebook" style="font-size:13px;"></i>&nbsp;&nbsp;Facebook</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <button class="btn btn-danger"><i class="fa fa-google" style="font-size:13px;"></i>&nbsp;&nbsp; Google</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid">Sign Up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--  <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+        </div>
+
+    </div>
+</div>
